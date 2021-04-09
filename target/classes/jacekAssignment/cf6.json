@@ -1,0 +1,21 @@
+{
+  "name": "John",
+  "age": 30,
+  "bike": {
+    "name": "Bajaj",
+    "models": ["Dominor", "Pulsar"]
+  },
+  "cars": [{
+    "name": "Ford",
+    "models": ["Fiesta", "Focus", "Mustang"]
+  },
+    {
+      "name": "BMW",
+      "models": ["320", "X3", "X5"]
+    },
+    {
+      "name": "Fiat",
+      "models": ["500", "Panda"]
+    }
+  ]
+}

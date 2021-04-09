@@ -1,0 +1,7 @@
+create table IF NOT EXISTS cstonedb3.gen_card_acct(
+cstone_feed_key      	bigint ,
+cstone_last_updatetm 	string ,
+gen_no               	bigint ,
+sys_gen_ts           	string ,
+cm11                 	bigint ,
+cm13                 	bigint )

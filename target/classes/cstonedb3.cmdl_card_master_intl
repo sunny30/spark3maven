@@ -1,0 +1,11 @@
+create table if not exists cstonedb3.cmdl_card_master_intl(
+            cm11 bigint ,
+            card_act_dt string,
+            card_act_sta string,
+            first_roc_dt string,
+            prod_logo string,
+            prod_nm string,
+            prod_dtl string,
+            prod_cd string,
+            supp_no string
+ )

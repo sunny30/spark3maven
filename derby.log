@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu Dec 10 17:33:24 IST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0176-4c88-d616-0000060a5cf0 
+on database directory /private/var/folders/s6/9jhqkp592bd5ghq0pkqz2c540000gn/T/spark-08d1e8d1-d04c-44f9-9a8c-f05e0922f286/metastore with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@42a57993 
+Loaded from file:/Users/sharadsingh/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
+java.vendor=GraalVM Community
+java.runtime.version=11.0.8+10-jvmci-20.2-b03
+user.dir=/Users/sharadsingh/Documents/spark3maven
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.15.2
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

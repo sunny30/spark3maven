@@ -1,0 +1,11 @@
+{
+  "tagname": "abc123",
+  "tag_info": {
+    "value": 123,
+    "quality": "good",
+    "extra": {
+      "value": "value"
+    },
+    "array": [1,2,3]
+  }
+}

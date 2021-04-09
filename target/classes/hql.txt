@@ -1,0 +1,574 @@
+/***********************************************************************************
+Map Group = "CSASSP", Map = "cbpr_intl_staging_layer", Map Version = 74
+***********************************************************************************/
+
+/***********************************************************************************
+Map session setting name = mapreduce.map.memory.mb, value = 1536
+Map session setting name = mapreduce.reduce.java.opts, value = -Xmx2048m
+Map session setting name = mapreduce.reduce.memory.mb, value = 2560
+Map session setting name = mapreduce.map.java.opts, value = -Xmx1152m -XX:MaxDirectMemorySize=512m -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=30 -XX:+ScavengeBeforeFullGC -XX:+CMSScavengeBeforeRemark
+Map session setting name = mapreduce.jobtracker.split.metainfo.maxsize, value = 10000000
+Map session setting name = mapreduce.task.timeout, value = 1800000
+Map session setting name = mapreduce.input.fileinputformat.split.maxsize, value = 256000000
+Map session setting name = hive.vectorized.execution.enabled, value = false
+Map session setting name = hive.fetch.task.conversion , value = none
+Map session setting name = mapreduce.fileoutputcommitter.algorithm.version , value = 2
+Map session setting name = hive.strict.checks.type.safety, value = false
+Map session setting name = hive.mapred.mode, value = nonstrict
+Map session setting name = hive.strict.checks.large.query, value = false
+Map session setting name = hive.strict.checks.cartesian.product, value = false
+Map session setting name = hive.vectorized.execution.reduce.enabled, value = false
+Map session setting name = spark.sql.parquet.enableVectorizedReader, value = false
+Map session setting name = spark.yarn.maxAppAttempts, value = 1
+Map session setting name = spark.sql.parquet.binaryAsString, value = true
+Map session setting name = spark.speculation, value = false
+Map session setting name = spark.memory.fraction, value = 0.7
+Map session setting name = executor-memory, value = 4g
+Map session setting name = executor-cores, value = 3
+Map session setting name = spark.serializer, value = org.apache.spark.serializer.KryoSerializer
+***********************************************************************************/
+
+/***********************************************************************************
+Pre-evaluated parameter name = julian, expression: */
+SELECT 2020268 FROM magellan.SingleRowDummyTable;
+/**********************************************************************************/
+/***********************************************************************************
+Input parameter name = RUNDATE, test value: */
+SELECT 2020268 FROM magellan.SingleRowDummyTable;
+/**********************************************************************************/
+/***********************************************************************************
+Pre-evaluated parameter name = startdate36months, expression: */
+  FROM magellan.SingleRowDummyTable;
+/**********************************************************************************/
+/***********************************************************************************
+Pre-evaluated parameter name = startdate42months, expression: */
+SELECT IBECDateFormat(IBECCastDate(Trunc(IBECDateAdd('mm', -43, From_UnixTime(Unix_Timestamp(), 'yyyy-MM-dd')), 'MM')), 'yyyy-MM-dd') FROM magellan.SingleRowDummyTable;
+/**********************************************************************************/
+
+-- Map Step   (intl_risk_pers_acct_hist_fnl)
+CREATE TABLE ##!sessionid##intl_risk_pers_acct_hist_fnl
+    AS
+SELECT
+--+ STREAMTABLE(a)
+        a.cm11 AS cm11,
+        Cast(c.prtr_id AS Int) AS prtr_id,
+        c.prtr_nm AS Partner,
+        c.glbl_prod_key_no AS curr_gp_product_key,
+        a.acct_new_basic_close_clct_in AS acct_new_basic_close_clct_in,
+        a.acct_new_basic_close_xfer_in AS acct_new_basic_close_xfer_in,
+        a.acct_cancel_ind AS acct_cancel_ind,
+        a.acct_eff_dt AS acct_eff_dt,
+        a.acct_bal_age_mth01_cd AS acct_bal_age_mth01_cd,
+        a.acct_cancel_rsn_mth01_cd AS acct_cancel_rsn_mth01_cd,
+        a.acct_bus_unit_cd AS acct_bus_unit_cd,
+        a.acct_tenure_mnths_ct AS acct_tenure_mnths_ct,
+        a.acct_bill_bal_mth01_amt AS acct_bill_bal_mth01_amt,
+        a.acct_bill_bal_on_file_mth01_amt AS act_bil_bal_on_file_mth01_amt,
+        a.acct_line_cr_mth01_amt AS acct_line_cr_mth01_amt,
+        a.acct_adb_total_mth01_amt AS acct_adb_total_mth01_amt,
+        a.acct_cash_adv_mth01_amt AS acct_cash_adv_mth01_amt,
+        a.acct_stmt_apr_prch_pct_rt AS acct_stmt_apr_prch_pct_rt,
+        a.acct_tot_spend_mth01_amt AS acct_tot_spend_mth01_amt,
+        a.acct_tot_fee_mth01_amt AS acct_tot_fee_mth01_amt,
+        a.acct_stmt_apr_prch_mth01_rt AS acct_stmt_apr_prch_mth01_rt,
+        a.acct_new_basic_close_volun_in AS acct_new_basic_close_volun_in,
+        a.acct_new_basic_close_invol_in AS acct_new_basic_close_invol_in,
+        a.acct_rcvr_am AS acct_rcvr_am,
+        a.acct_wrt_off_am AS acct_wrt_off_am,
+        a.cstone_feed_key AS cstone_feed_key,
+        a.acct_srce_sys_cd AS acct_srce_sys_cd,
+        a.acct_stmt_apr_cash_mth01_rt AS acct_stmt_apr_cash_mth01_rt,
+        a.acct_cr_trans_ct AS acct_cr_trans_ct,
+        a.acct_dr_trans_ct AS acct_dr_trans_ct,
+        a.acct_mkt_cd AS acct_mkt_cd,
+        a.acct_cycle_cut_dt AS acct_cycle_cut_dt,
+        a.acct_ia_pct_cd AS acct_ia_pct_cd,
+        c.intl_org_logo_no AS logo_org_id,
+        a.acct_cust_xref_id AS acct_cust_xref_id,
+        b.cm13 AS cm13,
+        b.cm15 AS cm15,
+        a.acct_credit_bureau_score AS acct_credit_bureau_score,
+        a.acct_rcvr_mo_01_am AS acct_rcvr_mo_01_am,
+        a.acct_new_basic_close_in AS acct_new_basic_close_in,
+        c.ppt_logo_cd AS acct_logo_cd,
+        b.acct_org_no AS acct_org_no,
+        a.acct_curr_mkt_cd AS acct_curr_mkt_cd,
+        a.as_of_dt AS as_of_dt,
+        c.ppt_logo_cd AS ppt_logo_cd,
+        c.ppt_logo_ds AS ppt_logo_desc,
+        c.ppt_logo_1_ds AS ppt_logo_desc1,
+        c.ppt_logo_2_ds AS ppt_logo_desc2,
+        c.ppt_logo_3_ds AS ppt_logo_desc3,
+        c.ia_prod_cd AS ia_pct_cd,
+        c.ia_prod_ds AS ia_pct_desc,
+        c.lob_cd AS lob_cd,
+        c.lob_ds AS lob_desc,
+        CASE
+            WHEN (a.acct_cancel_ind = 0)
+                 THEN (1)
+            ELSE (0)
+        END AS aif_ind,
+        Sum(a.acct_spend_mth01_amt) OVER (PARTITION BY a.cm11, as_of_dt) AS acct_spend_mth01_amt,
+        Row_Number() OVER (PARTITION BY a.cm11, a.as_of_dt ORDER BY a.acct_cycle_cut_dt DESC) AS cm_rank,
+        CASE
+            WHEN ((a.acct_ia_pct_cd IS NULL
+            OR a.acct_logo_cd IS NULL))
+                 THEN (c.glbl_prod_key_no)
+            ELSE (IBECTrim(Concat('PCT', ' ', IBECTrim(a.acct_logo_cd), ' ', IBECTrim(a.acct_ia_pct_cd), ' ', IBECTrim(c.intl_org_logo_no))))
+        END AS month_gp_product_key,
+        c.star_mkt_cd AS market,
+        h.iso_alpha_cd AS currency_cd
+    FROM cstonedb3.risk_pers_acct_hist a
+    INNER JOIN cstonedb3.risk_pers_acct b
+        ON a.cm11 = b.cm11
+    INNER JOIN cobrand_ref.cbpr_product_master c
+        ON ((((((IBECTrim(a.acct_prod_cd) = IBECTrim(c.intl_logo_no)
+            AND IBECTrim(a.acct_sub_prd_cd) = IBECTrim(c.ia_prod_cd))
+            AND IBECTrim(b.acct_org_no) = IBECTrim(c.intl_org_logo_no))
+            AND c.mkt_nm <> 'USA')
+            AND c.sta_cd = 'ACTIVE')
+            AND c.envir_archt_nm = 'MAGELLAN')
+            AND c.prcs_excl_in = 0)
+    INNER JOIN cstonedb3.gstar_market_identifier g
+        ON g.cons_org_org = c.intl_org_logo_no
+    INNER JOIN cstonedb3.crt_currency h
+        ON h.iso_no_cd = g.cons_org_curr
+    WHERE (a.as_of_dt >= Date ##startdate36months##
+        AND a.as_of_dt < Trunc(From_UnixTime(Unix_Timestamp(), 'yyyy-MM-dd'), 'MM'));
+
+-- Map Step   (intl_product_parameters_fnl)
+CREATE TABLE ##!sessionid##intl_product_parameters_fnl
+    AS
+SELECT prtr_nm AS Partner,
+        Cast(prtr_id AS Int) AS prtr_id,
+        intl_org_logo_no AS logo_org_id,
+        ppt_logo_cd AS ppt_logo_cd,
+        ppt_logo_ds AS ppt_logo_desc,
+        ppt_logo_1_ds AS ppt_logo_desc1,
+        ppt_logo_2_ds AS ppt_logo_desc2,
+        ppt_logo_3_ds AS ppt_logo_desc3,
+        ia_prod_cd AS ia_pct_cd,
+        ia_prod_ds AS ia_pct_desc,
+        lob_cd AS lob_cd,
+        lob_ds AS lob_desc,
+        glbl_prod_key_no AS gp_product_key,
+        prod_disp_srce_cd AS product_source,
+        appl_curr_cd AS app_currency_cd,
+        appl_mkt_cd AS app_market_cd2,
+        star_mkt_cd AS star_market_cd3,
+        mkt_nm AS parm_country_name,
+        Regexp_Replace(Substr(Date ##startdate36months##, 1, 7), '-', '') AS StartYYYYMM36,
+        Regexp_Replace(Substr(Date ##startdate42months##, 1, 7), '-', '') AS StartYYYYMM42,
+        Regexp_Replace(Substr(Add_months(From_UnixTime(Unix_Timestamp(), 'yyyy-MM-dd'), -1), 1, 7), '-', '') AS EndYYYYMM,
+        Year(Date ##startdate36months##) AS StartYear36,
+        Month(Date ##startdate36months##) AS StartMonth36,
+        Year(From_UnixTime(Unix_Timestamp(), 'yyyy-MM-dd')) AS EndYear,
+        Month(From_UnixTime(Unix_Timestamp(), 'yyyy-MM-dd')) AS EndMonth,
+        'MAR_01' AS Reference_Nm,
+        Date ##startdate36months## AS StartDate36,
+        Date ##startdate42months## AS StartDate42,
+        From_UnixTime(Unix_Timestamp(), 'yyyy-MM-dd') AS EndDate
+    FROM cobrand_ref.cbpr_product_master
+    WHERE (((mkt_nm <> 'USA'
+        AND sta_cd = 'ACTIVE')
+        AND envir_archt_nm = 'MAGELLAN')
+        AND prcs_excl_in = 0);
+
+-- Map Step   (intl_risk_pers_acct_fnl)
+CREATE TABLE ##!sessionid##intl_risk_pers_acct_fnl
+    AS
+SELECT a.cm11 AS cm11,
+        b.ppt_logo_cd AS ppt_logo_cd,
+        b.ppt_logo_desc AS ppt_logo_desc,
+        b.ppt_logo_desc1 AS ppt_logo_desc1,
+        b.ppt_logo_desc2 AS ppt_logo_desc2,
+        b.ppt_logo_desc3 AS ppt_logo_desc3,
+        b.ia_pct_cd AS ia_pct_cd,
+        b.ia_pct_desc AS ia_pct_desc,
+        b.lob_cd AS lob_cd,
+        b.lob_desc AS lob_desc,
+        Cast((cm11 * 100) AS BigInt) AS cm13,
+        a.cm15 AS cm15,
+        b.prtr_id AS prtr_id,
+        b.Partner AS Partner,
+        b.logo_org_id AS logo_org_id,
+        b.product_source AS product_source,
+        gp_product_key AS gp_product_key,
+        a.acct_eff_dt AS acct_eff_dt,
+        a.acct_ia_pct_cd AS acct_ia_pct_cd,
+        a.acct_logo_cd AS acct_logo_cd,
+        a.acct_org_no AS acct_org_no,
+        a.acct_mkt_cd AS acct_mkt_cd,
+        a.acct_curr_mkt_cd AS acct_curr_mkt_cd,
+        b.StartDate36 AS StartDate36,
+        b.EndYYYYMM AS EndYYYYMM,
+        b.EndDate AS EndDate,
+        b.StartYYYYMM36 AS StartYYYYMM36
+    FROM cstonedb3.risk_pers_acct a
+    INNER JOIN ##!sessionid##intl_product_parameters_fnl b
+        ON ((IBECTrim(a.acct_org_no) = IBECTrim(b.logo_org_id)
+            AND IBECTrim(a.acct_ia_pct_cd) = IBECTrim(b.ia_pct_cd))
+            AND b.product_source = 'PCT');
+
+-- Map Step   (intl_gen_card_acct_tmp)
+CREATE TABLE ##!sessionid##intl_gen_card_acct_tmp
+    AS
+SELECT a.gen_no AS gen_no,
+        a.cm11 AS cm11,
+        a.sys_gen_ts AS sys_gen_ts,
+        Row_Number() OVER (PARTITION BY a.cm11 ORDER BY a.cm13 ASC, sys_gen_ts ASC) AS cm_rank
+    FROM cstonedb3.gen_card_acct a
+    INNER JOIN ##!sessionid##intl_risk_pers_acct_fnl b
+        ON b.cm11 = a.cm11
+    WHERE a.cm13 IS NOT NULL;
+
+-- Map Step   (intl_gen_card_acct_fnl)
+CREATE TABLE ##!sessionid##intl_gen_card_acct_fnl
+    AS
+SELECT gen_no AS gen_no,
+        cm11 AS cm11,
+        Cast((cm11 * 100) AS BigInt) AS cm13
+    FROM ##!sessionid##intl_gen_card_acct_tmp
+    WHERE cm_rank = 1;
+
+-- These temp tables are not longer needed at this point
+DROP TABLE ##!sessionid##intl_gen_card_acct_tmp;
+
+-- Map Step   (intl_gstar_card_details_fnl)
+CREATE TABLE ##!sessionid##intl_gstar_card_details_fnl
+    AS
+SELECT crd_rec_id AS crd_rec_id,
+        crd_amed_date_expire AS crd_amed_date_expire,
+        crd_stat_cd AS crd_stat_cd,
+        cm11 AS cm11,
+        crd_dt_card_blocked AS crd_dt_card_blocked,
+        crd_date_opened AS crd_date_opened,
+        crd_card_block_cd AS crd_card_block_cd,
+        crd_card_cancel_cd AS crd_card_cancel_cd,
+        crd_cancel_cd_cmhdb AS crd_cancel_cd_cmhdb,
+        cm13 AS cm13,
+        cm15 AS cm15
+    FROM cstonedb3.gstar_card_details;
+
+-- Map Step   (intl_gms_global_cm_demog_fnl)
+CREATE TABLE ##!sessionid##intl_gms_global_cm_demog_fnl
+    AS
+SELECT cm15 AS cm15,
+        cm13 AS cm13,
+        cm_gend_cd AS cm_gend_cd,
+        birth_dt AS birth_dt
+    FROM cstonedb3.gms_global_cm_demog;
+
+-- Map Step   (intl_cm11_cyc_hist_revolve_rnk)
+CREATE TABLE ##!sessionid##intl_cm11_cyc_hist_revolve_rnk
+    AS
+SELECT cm11 AS cm11,
+        Trunc(d_stmt_date, 'MM') AS stmt_asofdt,
+        b.d_stmt_date AS d_stmt_date,
+        Row_Number() OVER (PARTITION BY cm11, Trunc(b.d_stmt_date, 'MM') ORDER BY b.d_stmt_date DESC) AS cm11_stmt_rnk,
+        b.d_aggr_bal AS d_aggr_bal
+    FROM ##!sessionid##intl_risk_pers_acct_fnl a
+    INNER JOIN cstonedb3.gstar_account_finance_info b
+        ON (Cast(a.cm11 AS Char(11)) = Substr(Cast(b.cm15 AS Char(15)), 1, 11)
+            AND b.d_cycle_flag = 'Y')
+    WHERE (b.stmt_month >= a.StartYYYYMM36
+        AND b.stmt_month <= a.EndYYYYMM);
+
+-- Map Step   (intl_cm11_cyc_hist_revolve_fnl)
+CREATE TABLE ##!sessionid##intl_cm11_cyc_hist_revolve_fnl
+    AS
+SELECT cm11 AS cm11,
+        stmt_asofdt AS stmt_asofdt,
+        d_stmt_date AS d_stmt_date,
+        d_aggr_bal AS d_aggr_bal
+    FROM ##!sessionid##intl_cm11_cyc_hist_revolve_rnk
+    WHERE cm11_stmt_rnk = 1;
+
+-- These temp tables are not longer needed at this point
+DROP TABLE ##!sessionid##intl_cm11_cyc_hist_revolve_rnk;
+
+-- Map Step   (intl_risk_per_acct_tseries_tmp)
+CREATE TABLE ##!sessionid##intl_risk_per_acct_tseries_tmp
+    AS
+SELECT a.cm11 AS cm11,
+        as_of_dt AS as_of_dt,
+        acct_cycle_cut_dt AS acct_cycle_cut_dt,
+        acct_rev_bal_amt AS acct_rev_bal_amt,
+        acct_canc_ind AS acct_canc_ind,
+        Row_Number() OVER (PARTITION BY a.cm11, a.as_of_dt ORDER BY a.acct_cycle_cut_dt DESC) AS cm_rank
+    FROM cstonedb3.risk_pers_acct_timeseries a
+    INNER JOIN ##!sessionid##intl_risk_pers_acct_fnl b
+        ON a.cm11 = b.cm11
+    WHERE (a.as_of_dt >= Date ##startdate36months##
+        AND a.acct_canc_ind = 0);
+
+-- Map Step   (intl_risk_per_acct_tseries_fnl)
+CREATE TABLE ##!sessionid##intl_risk_per_acct_tseries_fnl
+    AS
+SELECT cm11 AS cm11,
+        as_of_dt AS as_of_dt,
+        acct_rev_bal_amt AS acct_rev_bal_amt
+    FROM ##!sessionid##intl_risk_per_acct_tseries_tmp
+    WHERE cm_rank = 1;
+
+-- These temp tables are not longer needed at this point
+DROP TABLE ##!sessionid##intl_risk_per_acct_tseries_tmp;
+
+-- Map Step   (Intl_pro_param_org_logo_fnl)
+CREATE TABLE ##!sessionid##Intl_pro_param_org_logo_fnl
+    AS
+SELECT ppt_logo_cd AS ppt_logo_cd,
+        logo_org_id AS logo_org_id,
+        product_source AS product_source,
+        Max(prtr_id) AS prtr_id,
+        Max(Partner) AS Partner,
+        Max(ppt_logo_desc1) AS ppt_logo_desc1,
+        Max(ppt_logo_desc2) AS ppt_logo_desc2,
+        Max(ppt_logo_desc3) AS ppt_logo_desc3,
+        Max(ia_pct_cd) AS ia_pct_cd,
+        Max(ia_pct_desc) AS ia_pct_desc,
+        Max(app_market_cd2) AS app_market_cd2,
+        Max(star_market_cd3) AS star_market_cd3,
+        Max(parm_country_name) AS parm_country_name,
+        Max(StartYYYYMM42) AS StartYYYYMM42,
+        Max(StartYear36) AS StartYear36,
+        Max(StartMonth36) AS StartMonth36,
+        Max(EndYear) AS EndYear,
+        Max(EndMonth) AS EndMonth,
+        Max(StartYYYYMM36) AS StartYYYYMM36,
+        Max(EndYYYYMM) AS EndYYYYMM,
+        Max(EndDate) AS EndDate,
+        Max(gp_product_key) AS gp_product_key,
+        Max(app_currency_cd) AS app_currency_cd,
+        Max(ppt_logo_desc) AS ppt_logo_desc,
+        Max(lob_cd) AS lob_cd,
+        Max(lob_desc) AS lob_desc,
+        Max(StartDate36) AS StartDate36,
+        Max(StartDate42) AS StartDate42
+    FROM ##!sessionid##intl_product_parameters_fnl
+    GROUP BY ppt_logo_cd, logo_org_id, product_source;
+
+-- Map Step   (intl_risk_pers_acct_tmp1)
+CREATE TABLE ##!sessionid##intl_risk_pers_acct_tmp1
+    AS
+SELECT cm11 AS cm11,
+        b.ppt_logo_desc1 AS ppt_logo_desc1,
+        b.ppt_logo_desc2 AS ppt_logo_desc2,
+        b.ppt_logo_desc3 AS ppt_logo_desc3,
+        b.ppt_logo_cd AS ppt_logo_cd,
+        b.ppt_logo_desc AS ppt_logo_desc,
+        b.ia_pct_cd AS ia_pct_cd,
+        b.ia_pct_desc AS ia_pct_desc,
+        b.lob_cd AS lob_cd,
+        b.lob_desc AS lob_desc,
+        Cast((cm11 * 100) AS BigInt) AS cm13,
+        a.cm15 AS cm15,
+        b.StartYYYYMM36 AS StartYYYYMM36,
+        b.EndYYYYMM AS EndYYYYMM,
+        b.prtr_id AS prtr_id,
+        b.Partner AS Partner,
+        b.EndDate AS EndDate,
+        b.StartDate36 AS StartDate36,
+        b.gp_product_key AS gp_product_key,
+        b.product_source AS product_source,
+        b.logo_org_id AS logo_org_id,
+        a.acct_eff_dt AS acct_eff_dt,
+        a.acct_ia_pct_cd AS acct_ia_pct_cd,
+        a.acct_logo_cd AS acct_logo_cd,
+        a.acct_org_no AS acct_org_no,
+        a.acct_mkt_cd AS acct_mkt_cd,
+        a.acct_curr_mkt_cd AS acct_curr_mkt_cd
+    FROM cstonedb3.risk_pers_acct a
+    INNER JOIN ##!sessionid##Intl_pro_param_org_logo_fnl b
+        ON (((IBECTrim(b.ppt_logo_cd) = IBECTrim(a.acct_logo_cd)
+            AND b.product_source = 'PCT')
+            AND IBECTrim(b.logo_org_id) = IBECTrim(a.acct_org_no))
+            AND a.acct_ia_pct_cd IS NULL);
+
+-- Map Step   (intl_risk_pers_acct_tmp1a)
+-- <Warning>: - INSERT .. Values statements are not supported in Hive-QL until version 0.14 - work-around requires single row table.
+INSERT INTO TABLE ##!sessionid##intl_risk_pers_acct_fnl
+SELECT cm11 AS cm11,
+        ppt_logo_cd AS ppt_logo_cd,
+        ppt_logo_desc AS ppt_logo_desc,
+        ppt_logo_desc1 AS ppt_logo_desc1,
+        ppt_logo_desc2 AS ppt_logo_desc2,
+        ppt_logo_desc3 AS ppt_logo_desc3,
+        ia_pct_cd AS ia_pct_cd,
+        ia_pct_desc AS ia_pct_desc,
+        lob_cd AS lob_cd,
+        lob_desc AS lob_desc,
+        cm13 AS cm13,
+        cm15 AS cm15,
+        prtr_id AS prtr_id,
+        Partner AS Partner,
+        logo_org_id AS logo_org_id,
+        product_source AS product_source,
+        gp_product_key AS gp_product_key,
+        acct_eff_dt AS acct_eff_dt,
+        acct_ia_pct_cd AS acct_ia_pct_cd,
+        acct_logo_cd AS acct_logo_cd,
+        acct_org_no AS acct_org_no,
+        acct_mkt_cd AS acct_mkt_cd,
+        acct_curr_mkt_cd AS acct_curr_mkt_cd,
+        StartDate36 AS StartDate36,
+        EndYYYYMM AS EndYYYYMM,
+        EndDate AS EndDate,
+        StartYYYYMM36 AS StartYYYYMM36
+    FROM ##!sessionid##intl_risk_pers_acct_tmp1;
+
+-- These temp tables are not longer needed at this point
+DROP TABLE ##!sessionid##intl_risk_pers_acct_tmp1;
+
+-- Map Step   (intl_risk_new_acct_tmp1)
+CREATE TABLE ##!sessionid##intl_risk_new_acct_tmp1
+    AS
+SELECT na_supp_no AS na_supp_no,
+        b.gp_product_key AS gp_product_key,
+        b.prtr_id AS prtr_id,
+        b.Partner AS Partner,
+        na_pcn_no AS na_pcn_no,
+        b.product_source AS product_source,
+        'Y' AS tag_application_date,
+        a.na_cm13 AS na_cm13,
+        a.na_prod_pct AS na_prod_pct,
+        a.na_cm11 AS na_cm11,
+        a.na_cm15 AS na_cm15,
+        a.na_pcn_iss_dt AS na_pcn_iss_dt,
+        a.na_pcn_type_cd AS na_pcn_type_cd,
+        a.na_prod_cd AS na_prod_cd,
+        a.na_prod_logo AS na_prod_logo,
+        a.na_curr_cd AS na_curr_cd,
+        a.na_sub_chan_cd1 AS na_sub_chan_cd1,
+        a.na_dcsn_cd AS na_dcsn_cd,
+        a.na_dcsn_rsn_cd AS na_dcsn_rsn_cd,
+        a.na_asgn_loc AS na_asgn_loc,
+        a.na_srce_cd1 AS na_srce_cd1,
+        a.na_dcsn_rsn_ds AS na_dcsn_rsn_ds,
+        a.na_mkt_cd AS na_mkt_cd,
+        a.na_final_dt AS na_final_dt,
+        a.na_cbr_score AS na_cbr_score,
+        a.na_gam_cbr_score AS na_gam_cbr_score,
+        a.na_il_cbr_score_line_dcsn AS na_il_cbr_score_line_dcsn
+    FROM cstonedb3.risk_new_acct a
+    INNER JOIN ##!sessionid##Intl_pro_param_org_logo_fnl b
+        ON (((((IBECTrim(b.ppt_logo_cd) = IBECTrim(a.na_prod_logo)
+            AND a.na_prod_pct IS NULL)
+            AND b.app_currency_cd = IBECTrim(a.na_curr_cd))
+            AND a.na_supp_no IS NOT NULL)
+            AND IBECTrim(a.na_sub_chan_cd1) IN ('REG', 'DE'))
+            AND b.product_source = 'PCT')
+    WHERE ((a.na_pcn_iss_dt >= Date ##startdate42months##
+        AND a.na_pcn_iss_dt <= b.EndDate)
+        OR (a.na_final_dt >= Date ##startdate42months##
+        AND a.na_final_dt <= b.EndDate));
+
+-- Map Step   (intl_risk_new_acct_fnl)
+CREATE TABLE ##!sessionid##intl_risk_new_acct_fnl
+    AS
+SELECT na_cm13 AS na_cm13,
+        na_prod_pct AS na_prod_pct,
+        na_cm11 AS na_cm11,
+        na_cm15 AS na_cm15,
+        na_pcn_no AS na_pcn_no,
+        na_pcn_iss_dt AS na_pcn_iss_dt,
+        na_pcn_type_cd AS na_pcn_type_cd,
+        na_supp_no AS na_supp_no,
+        na_prod_cd AS na_prod_cd,
+        na_prod_logo AS na_prod_logo,
+        na_curr_cd AS na_curr_cd,
+        na_sub_chan_cd1 AS na_sub_chan_cd1,
+        na_dcsn_cd AS na_dcsn_cd,
+        na_dcsn_rsn_cd AS na_dcsn_rsn_cd,
+        na_asgn_loc AS na_asgn_loc,
+        na_srce_cd1 AS na_srce_cd1,
+        na_dcsn_rsn_ds AS na_dcsn_rsn_ds,
+        na_mkt_cd AS na_mkt_cd,
+        na_final_dt AS na_final_dt,
+        na_cbr_score AS na_cbr_score,
+        na_gam_cbr_score AS na_gam_cbr_score,
+        na_il_cbr_score_line_dcsn AS na_il_cbr_score_line_dcsn,
+        b.prtr_id AS prtr_id,
+        b.Partner AS Partner,
+        b.gp_product_key AS gp_product_key,
+        b.product_source AS product_source,
+        'Y' AS tag_application_date
+    FROM cstonedb3.risk_new_acct a
+    INNER JOIN ##!sessionid##intl_product_parameters_fnl b
+        ON ((((IBECTrim(a.na_curr_cd) = IBECTrim(b.app_currency_cd)
+            AND IBECTrim(a.na_prod_pct) = IBECTrim(b.ia_pct_cd))
+            AND a.na_supp_no IS NOT NULL)
+            AND b.product_source = 'PCT')
+            AND IBECTrim(a.na_sub_chan_cd1) IN ('REG', 'DE'))
+    WHERE ((na_pcn_iss_dt >= Date ##startdate42months##
+        AND a.na_pcn_iss_dt <= b.EndDate)
+        OR (a.na_final_dt >= Date ##startdate42months##
+        AND a.na_final_dt <= b.EndDate));
+
+-- Map Step   (intl_risk_new_acct_tmp1a)
+-- <Warning>: - INSERT .. Values statements are not supported in Hive-QL until version 0.14 - work-around requires single row table.
+INSERT INTO TABLE ##!sessionid##intl_risk_new_acct_fnl
+SELECT na_cm13 AS na_cm13,
+        na_prod_pct AS na_prod_pct,
+        na_cm11 AS na_cm11,
+        na_cm15 AS na_cm15,
+        na_pcn_no AS na_pcn_no,
+        na_pcn_iss_dt AS na_pcn_iss_dt,
+        na_pcn_type_cd AS na_pcn_type_cd,
+        na_supp_no AS na_supp_no,
+        na_prod_cd AS na_prod_cd,
+        na_prod_logo AS na_prod_logo,
+        na_curr_cd AS na_curr_cd,
+        na_sub_chan_cd1 AS na_sub_chan_cd1,
+        na_dcsn_cd AS na_dcsn_cd,
+        na_dcsn_rsn_cd AS na_dcsn_rsn_cd,
+        na_asgn_loc AS na_asgn_loc,
+        na_srce_cd1 AS na_srce_cd1,
+        na_dcsn_rsn_ds AS na_dcsn_rsn_ds,
+        na_mkt_cd AS na_mkt_cd,
+        na_final_dt AS na_final_dt,
+        na_cbr_score AS na_cbr_score,
+        na_gam_cbr_score AS na_gam_cbr_score,
+        na_il_cbr_score_line_dcsn AS na_il_cbr_score_line_dcsn,
+        prtr_id AS prtr_id,
+        Partner AS Partner,
+        gp_product_key AS gp_product_key,
+        product_source AS product_source,
+        tag_application_date AS tag_application_date
+    FROM ##!sessionid##intl_risk_new_acct_tmp1;
+
+-- These temp tables are not longer needed at this point
+DROP TABLE ##!sessionid##intl_risk_new_acct_tmp1;
+
+-- Map Step   (intl_wwfis_fraud_trans_fnl)
+CREATE TABLE ##!sessionid##intl_wwfis_fraud_trans_fnl
+    AS
+SELECT b.cm11 AS cm11,
+        a.charge_amt AS charge_amt,
+        a.bill_period AS bill_period,
+        a.cm_bill_am AS cm_bill_am,
+        Concat('20', Substr(a.bill_period, 1, 2), '-', Substr(a.bill_period, 3, 4), '-', '01') AS as_of_dt
+    FROM cstonedb3.wwfis_fraud_trans a
+    INNER JOIN ##!sessionid##intl_risk_pers_acct_fnl b
+        ON a.cm11 = b.cm11
+    WHERE (cntl_desc_cd = 'LOSS'
+        AND a.bill_period >= 1601);
+
+-- Map Step   (intl_cmdl_card_master_intl_fnl)
+CREATE TABLE ##!sessionid##intl_cmdl_card_master_intl_fnl
+    AS
+SELECT p.partner AS partner,
+        c.cm11 AS cm11,
+        c.card_act_dt AS card_act_dt,
+        c.card_act_sta AS card_act_sta,
+        c.first_roc_dt AS first_roc_dt,
+        c.prod_logo AS prod_logo,
+        c.prod_nm AS prod_nm,
+        c.prod_dtl AS prod_dtl,
+        c.prod_cd AS prod_cd,
+        c.supp_no AS supp_no
+    FROM cstonedb3.cmdl_card_master_intl c
+    INNER JOIN ##!sessionid##intl_product_parameters_fnl p
+        ON (c.prod_logo = p.ppt_logo_cd
+            AND c.prod_cd = p.ia_pct_cd)
+    WHERE supp_no = '00';
