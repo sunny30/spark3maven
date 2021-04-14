@@ -11,7 +11,7 @@ object LineageTraversal{
 
 class LineageTraversal(plan:LogicalPlan) {
 
-  var lineageMap  = Map[String,LineageMetaInfo]
+  var lineageMap:Map[String,LineageMetaInfo]  = Map()
 
   def traverse(plan: LogicalPlan,parent:LogicalPlan): Unit ={
     plan match {
